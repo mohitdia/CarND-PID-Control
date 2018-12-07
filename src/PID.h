@@ -1,6 +1,8 @@
 #ifndef PID_H
 #define PID_H
 
+#include <vector>
+
 class PID {
 public:
   /*
@@ -9,6 +11,15 @@ public:
   double p_error;
   double i_error;
   double d_error;
+  double prev_cte;
+
+  /**
+   * Variables to calculate min, avg and max error.
+  **/
+  long num_data;
+  double cteSum;
+  double minError;
+  double maxError;
 
   /*
   * Coefficients
@@ -16,6 +27,7 @@ public:
   double Kp;
   double Ki;
   double Kd;
+
 
   /*
   * Constructor
@@ -41,6 +53,21 @@ public:
   * Calculate the total PID error.
   */
   double TotalError();
+
+  /*
+  *  Returns the average error.
+  */
+  double AverageError();
+
+  /*
+  * Returns the min error.
+  */
+  double MinError();
+
+  /*
+  * Returns the max error.
+  */
+  double MaxError();
 };
 
 #endif /* PID_H */
